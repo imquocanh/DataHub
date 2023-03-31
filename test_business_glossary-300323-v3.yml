@@ -1,0 +1,182 @@
+version: 2 ## Thay đổi với mỗi lần tạo file, chỉnh lên v2
+source: DataHub ## Cố định
+owners:
+##  users: ## option, nếu có user thì bỏ dấu comment (##) trước users:, điền user DataHub là owner của file này ở dòng tiếp theo, nếu đã điền users thì không điền groups
+##    - anhnq2.ho   ## nếu dòng users: được bỏ comment, thì bỏ dấu comment (##) trước - anhnq2.ho, và điền user trên DataHub 
+##  groups: ## option, nếu có group thì bỏ dấu comment (##) trước groups:, điền group user DataHub là owner của file này ở dòng tiếp theo, nếu đã điền groups thì không điền users
+##    - interior ## nếu dòng groups: được bỏ comment, thì bỏ dấu comment (##) trước - interior, và điền user group trên DataHub 
+url: ##  option, điền link  của tài liệu liên quan tới file này
+
+nodes: 
+## - name:  ##-------Nếu có term goup cha thì bỏ dấu comment (##) trước - name:, và điền tên term group
+## --------------------Bắt đầu: khai báo term group và term thuộc term group 1
+  - name: Classification  ## Tên term group, ví dụ Classification
+    description: A set of terms related to Data Classification ## mô tả cho term group
+    owners:
+      users: ## option, nếu có user thì bỏ dấu comment (##) trước users:, điền user DataHub là owner của file này ở dòng tiếp theo, nếu đã điền users thì không điền groups
+        - anhnq2.ho ## nếu dòng users: được bỏ comment, thì bỏ dấu comment (##) trước - anhnq2.ho, và điền user trên DataHub 
+##    groups: ## option, nếu có group thì bỏ dấu comment (##) trước groups:, điền group user DataHub là owner của file này ở dòng tiếp theo, nếu đã điền groups thì không điền users
+##      - interior ## nếu dòng groups: được bỏ comment, thì bỏ dấu comment (##) trước - interior, và điền user group trên DataHub 
+    knowledge_links:
+      - label: Wiki link for classification ##  option, điền keywork mô tả dẫn link tới term group này
+        url: "https://en.wikipedia.org/wiki/Classification" ##  option, điền link của tài liệu liên quan tới keywork này khi có điền giá trị cho trường label
+   ## -------- Bắt đầu khai báo term thuộc term group 1, ở ví dụ này là term group Classification
+    terms: 
+    ## --------term 1
+      - name: Sensitive ## --------tên term
+        description: Sensitive Data sẽ bị thay đổi nếu update lại ## --------mô tả cho term, mô tả có bị thay đổi sau update ?
+        custom_properties:
+          is_confidential: true ## false sửa lại thành true sau update
+        ##domain: Marketing ## --------option, domain được gán cho term, nếu có giá trị thì bỏ dấu comment (##) trước domain:, term này sẽ được gán cho domain tên là Marketing (nếu domain chưa tồn tại, sẽ được tạo tự động)   
+    ## --------term 2  
+      - name: Confidential ## --------tên term
+        description: Confidential Data ## --------mô tả cho term
+        ##custom_properties:
+          ##is_confidential: true ## bỏ dòng này sau update ?
+        ##domain: Marketing ## --------option, domain được gán cho term, nếu có giá trị thì bỏ dấu comment (##) trước domain:, term này sẽ được gán cho domain tên là Marketing (nếu domain chưa tồn tại, sẽ được tạo tự động)         
+    ## --------term 3      
+      - name: HighlyConfidential ## --------tên term
+        description: Highly Confidential Data ## --------mô tả cho term
+        custom_properties:
+          is_confidential: true
+        ##domain: Marketing ## --------option, domain được gán cho term, nếu có giá trị thì bỏ dấu comment (##) trước domain:, term này sẽ được gán cho domain tên là Marketing (nếu domain chưa tồn tại, sẽ được tạo tự động)   --> gỡ domain sau update ?
+    ## --------term 4
+      - name: term_Test_custom_properties_v1 ## --------tên term
+        description: Mô tả cho term_Test_custom_properties_v1 ## --------mô tả cho term
+        term_source: "EXTERNAL"
+        source_ref: FIBO
+        source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+        knowledge_links:
+          - url: "https://en.wikipedia.org/wiki/Spoon"
+            label: Wiki link
+        inherits:
+          - Classification.HighlyConfidential
+        contains:
+          - ClientsAndAccounts.Balance
+        custom_properties:
+          is_confidential: false
+          is_CDE: true
+          is_cute: no
+          is_test: true
+        domain: domain_test ## --------option, domain được gán cho term, nếu có giá trị thì bỏ dấu comment (##) trước domain:, term này sẽ được gán cho domain tên là Marketing (nếu domain chưa tồn tại, sẽ được tạo tự động)   
+    ## --------term 5
+      - name: term_Test_custom_properties_v2 ## --------tên term
+        description: Mô tả cho term_Test_custom_properties_v2 ## --------mô tả cho term
+        term_source: "INTERNAL"
+        source_ref: Google
+        source_url: "https://google.com.vn"
+        knowledge_links:
+          - url: "https://mcredit.com.vn"
+            label: MCredit link
+        inherits:
+          - Classification.HighlyConfidential
+        contains:
+          - Classification.term_Test_custom_properties_v1
+        custom_properties:
+          is_confidential: true
+          is_CDE: true
+          is_strong: yes
+          apple_mew_mew: tao meo
+          3_kick: ba cich
+          free: may be
+          is_cute: no
+          is_test: true
+        domain: domain_test ## --------option, domain được gán cho term, nếu có giá trị thì bỏ dấu comment (##) trước domain:, term này sẽ được gán cho domain tên là Marketing (nếu domain chưa tồn tại, sẽ được tạo tự động)           
+  ## -------- Kết thúc khai báo term thuộc term group 1
+## --------------------Kết thúc: khai báo term group và term thuộc term group 1
+## --------------------Bắt đầu: khai báo term group và term thuộc term group 2
+  - name: PersonalInformation
+    description: All terms related to personal information
+    owners:
+      users:
+        - anhnq2.ho
+    terms:
+      - name: Email
+        ## An example of using an id to pin a term to a specific guid
+        # id: "urn:li:glossaryTerm:41516e310acbfd9076fffc2c98d2d1a3"
+        description: An individual's email address
+        ##inherits:
+          ##- Classification.Confidential ## có bị gỡ sau update ?
+        ##owners:
+          ##groups:
+            ##- Trust and Safety ## có bị gỡ sau update ?
+      - name: Address
+        description: A physical address
+      - name: Gender
+        description: The gender identity of the individual
+        inherits:
+          - Classification.Sensitive
+## --------------------Kết thúc: khai báo term group và term thuộc term group 2
+  - name: ClientsAndAccounts
+    description: Provides basic concepts such as account, account holder, account provider, relationship manager that are commonly used by financial services providers to describe customers and to determine counterparty identities
+    owners:
+      groups:
+        - finance
+    terms:
+      - name: Account
+        description: Container for records associated with a business arrangement for regular transactions and services
+        term_source: "EXTERNAL"
+        source_ref: FIBO
+        source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+        inherits:
+          - Classification.HighlyConfidential
+        contains:
+          - PersonalInformation.Email ## ClientsAndAccounts.Balance có bị thay đổi thành PersonalInformation.Email sau update ?
+      - name: Balance
+        description: Amount of money available or owed
+        term_source: "EXTERNAL"
+        source_ref: FIBO
+        source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Balance"
+## --------------------Kết thúc: khai báo term group và term thuộc term group 3
+  - name: Housing
+    description: Provides terms related to the housing domain
+    owners:
+      groups:
+        - interior
+    nodes:
+      - name: Colors
+        description: "Colors that are used in Housing construction"
+        terms:
+          - name: Red
+            description: "red color"
+            term_source: "EXTERNAL"
+            source_ref: FIBO
+            source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+
+          - name: Green
+            description: "green color"
+            term_source: "EXTERNAL"
+            source_ref: FIBO
+            source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+
+          - name: Pink
+            description: pink color
+            term_source: "EXTERNAL"
+            source_ref: FIBO
+            source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+    terms:
+      - name: WindowColor
+        description: Supported window colors
+        term_source: "EXTERNAL"
+        source_ref: FIBO
+        source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+        values:
+          - House.Colors.Red
+          - House.Colors.Pink
+
+      - name: Kitchen
+        description: a room or area where food is prepared and cooked.
+        term_source: "EXTERNAL"
+        source_ref: FIBO
+        source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+
+      - name: Spoon
+        description: an implement consisting of a small, shallow oval or round bowl on a long handle, used for eating, stirring, and serving food.
+        term_source: "EXTERNAL"
+        source_ref: FIBO
+        source_url: "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/Account"
+        related_terms:
+          - House.Kitchen
+        knowledge_links:
+          - url: "https://en.wikipedia.org/wiki/Spoon"
+            label: Wiki link
